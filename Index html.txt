@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor & Flow | Recipes, Workouts, Music & Poetry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e76f51;
+            --secondary: #2a9d8f;
+            --accent: #e9c46a;
+            --dark: #264653;
+            --light: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--light);
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            height: 90vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="50" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100px 100px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(231, 111, 81, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Social Bar */
+        .social-bar {
+            background: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .social-link.whatsapp { color: #25D366; border-color: #25D366; }
+        .social-link.whatsapp:hover { background: #25D366; color: white; }
+
+        .social-link.instagram { 
+            color: #E4405F; 
+            border-color: #E4405F;
+        }
+        .social-link.instagram:hover { 
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
+            color: white;
+            border-color: transparent;
+        }
+
+        .social-link.tiktok { color: #000; border-color: #000; }
+        .social-link.tiktok:hover { background: #000; color: white; }
+
+        .social-link.facebook { color: #1877F2; border-color: #1877F2; }
+        .social-link.facebook:hover { background: #1877F2; color: white; }
+
+        .social-link.youtube { color: #FF0000; border-color: #FF0000; }
+        .social-link.youtube:hover { background: #FF0000; color: white; }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .section-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3));
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-recipe { background: #ffe5e0; color: var(--primary); }
+        .tag-workout { background: #e0f2f1; color: var(--secondary); }
+        .tag-music { background: #fff8e1; color: #f9a825; }
+        .tag-poetry { background: #f3e5f5; color: #7b1fa2; }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Category Sections */
+        .recipes-section { background: #fff5f3; }
+        .workouts-section { background: #e8f6f5; }
+        .music-section { background: #fffbea; }
+        .poetry-section { background: #faf5ff; }
+
+        /* Newsletter */
+        .newsletter {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            margin: 3rem 5%;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .newsletter-form input {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            width: 300px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form input {
+                width: 100%;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Flavor & Flow</a>
+        <ul class="nav-links">
+            <li><a href="#recipes">Recipes</a></li>
+            <li><a href="#workouts">Workouts</a></li>
+            <li><a href="#music">Music</a></li>
+            <li><a href="#poetry">Poetry</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu">☰</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Where Flavor Meets Flow</h1>
+            <p>Discover recipes that nourish, workouts that transform, music that moves you, and poetry that speaks to your soul.</p>
+            <a href="#recipes" class="hero-btn">Start Exploring</a>
+        </div>
+    </section>
+
+    <!-- Social Media Bar -->
+    <div class="social-bar">
+        <a href="https://wa.me/your-number" target="_blank" class="social-link whatsapp">
+            <span>💬</span> WhatsApp
+        </a>
+        <a href="https://instagram.com/your-handle" target="_blank" class="social-link instagram">
+            <span>📸</span> Instagram
+        </a>
+        <a href="https://tiktok.com/@your-handle" target="_blank" class="social-link tiktok">
+            <span>🎵</span> TikTok
+        </a>
+        <a href="https://facebook.com/your-page" target="_blank" class="social-link facebook">
+            <span>👍</span> Facebook
+        </a>
+        <a href="https://youtube.com/@your-channel" target="_blank" class="social-link youtube">
+            <span>▶️</span> YouTube
+        </a>
+    </div>
+
+    <!-- Recipes Section -->
+    <section id="recipes" class="recipes-section">
+        <div class="section-header fade-in">
+            <div class="section-icon">🍳</div>
+            <h2>Recipes</h2>
+            <p>Healthy, delicious meals to fuel your body and delight your taste buds</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-image">🥗</div>
+                <div class="card-content">
+                    <span class="card-tag tag-recipe">Recipe</span>
+                    <h3>Power Bowl with Quinoa & Avocado</h3>
+                    <p>A nutrient-packed bowl featuring fluffy quinoa, creamy avocado, roasted chickpeas, and a zesty lemon tahini dressing.</p>
+                    <div class="card-meta">
+                        <span>⏱ 25 min</span>
+                        <span>🔥 420 cal</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image">🍜</div>
+                <div class="card-content">
+                    <span class="card-tag tag-recipe">Recipe</span>
+                    <h3>Post-Workout Protein Ramen</h3>
+                    <p>Rich bone broth ramen with soft-boiled eggs, spinach, mushrooms, and tender chicken breast for optimal recovery.</p>
+                    <div class="card-meta">
+                        <span>⏱ 40 min</span>
+                        <span>🔥 580 cal</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image">🥑</div>
+                <div class="card-content">
+                    <span class="card-tag tag-recipe">Recipe</span>
+                    <h3>Morning Green Smoothie</h3>
+                    <p>Spinach, banana, almond butter, and oat milk blended into the perfect energizing start to your day.</p>
+                    <div class="card-meta">
+                        <span>⏱ 5 min</span>
+                        <span>🔥 280 cal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workouts Section -->
+    <section id="workouts" class="workouts-section">
+        <div class="section-header fade-in">
+            <div class="section-icon">💪</div>
+            <h2>Workouts</h2>
+            <p>Movement routines that build strength, flexibility, and inner peace</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #2a9d8f, #1d7a6b);">🧘</div>
+                <div class="card-content">
+                    <span class="card-tag tag-workout">Workout</span>
+                    <h3>Morning Yoga Flow</h3>
+                    <p>A gentle 20-minute sequence to wake up your body, improve flexibility, and set a mindful tone for the day.</p>
+                    <div class="card-meta">
+                        <span>⏱ 20 min</span>
+                        <span>💧 Low Intensity</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #2a9d8f, #1d7a6b);">🏃</div>
+                <div class="card-content">
+                    <span class="card-tag tag-workout">Workout</span>
+                    <h3>HIIT Cardio Blast</h3>
+                    <p>High-intensity interval training to boost your metabolism and build endurance in just 30 minutes.</p>
+                    <div class="card-meta">
+                        <span>⏱ 30 min</span>
+                        <span>🔥 High Intensity</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #2a9d8f, #1d7a6b);">🤸</div>
+                <div class="card-content">
+                    <span class="card-tag tag-workout">Workout</span>
+                    <h3>Core Strength Builder</h3>
+                    <p>Targeted exercises to strengthen your core, improve posture, and prevent injury. No equipment needed.</p>
+                    <div class="card-meta">
+                        <span>⏱ 15 min</span>
+                        <span>💧 Medium Intensity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section id="music" class="music-section">
+        <div class="section-header fade-in">
+            <div class="section-icon">🎵</div>
+            <h2>Music</h2>
+            <p>Curated playlists and sounds to accompany your journey</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #e9c46a, #d4a843);">🎧</div>
+                <div class="card-content">
+                    <span class="card-tag tag-music">Music</span>
+                    <h3>Workout Energy Mix</h3>
+                    <p>High-tempo beats to push you through the toughest sets. Featuring electronic, hip-hop, and rock anthems.</p>
+                    <div class="card-meta">
+                        <span>🎵 45 min</span>
+                        <span>⚡ 140 BPM</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #e9c46a, #d4a843);">🎹</div>
+                <div class="card-content">
+                    <span class="card-tag tag-music">Music</span>
+                    <h3>Cooking Chill Vibes</h3>
+                    <p>Lo-fi and acoustic melodies perfect for unwinding in the kitchen while you prepare your favorite meals.</p>
+                    <div class="card-meta">
+                        <span>🎵 60 min</span>
+                        <span>🌿 90 BPM</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #e9c46a, #d4a843);">🎸</div>
+                <div class="card-content">
+                    <span class="card-tag tag-music">Music</span>
+                    <h3>Poetry Reading Ambience</h3>
+                    <p>Soft piano and ambient soundscapes designed to create the perfect atmosphere for reading and reflection.</p>
+                    <div class="card-meta">
+                        <span>🎵 30 min</span>
+                        <span>🌙 70 BPM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Poetry Section -->
+    <section id="poetry" class="poetry-section">
+        <div class="section-header fade-in">
+            <div class="section-icon">✍️</div>
+            <h2>Poetry</h2>
+            <p>Words that weave emotion, rhythm, and meaning into everyday life</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">🌅</div>
+                <div class="card-content">
+                    <span class="card-tag tag-poetry">Poetry</span>
+                    <h3>The Morning Ritual</h3>
+                    <p>"Steam rises like whispered prayers, coffee dark as the thoughts I leave behind. Each sip a promise to begin again..."</p>
+                    <div class="card-meta">
+                        <span>✍️ Free Verse</span>
+                        <span>❤️ 234 likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">💪</div>
+                <div class="card-content">
+                    <span class="card-tag tag-poetry">Poetry</span>
+                    <h3>Iron & Ink</h3>
+                    <p>"Muscles burn like verses unwritten, each rep a stanza of strength. The barbell is my pen, the gym my page..."</p>
+                    <div class="card-meta">
+                        <span>✍️ Spoken Word</span>
+                        <span>❤️ 189 likes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-image" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">🍃</div>
+                <div class="card-content">
+                    <span class="card-tag tag-poetry">Poetry</span>
+                    <h3>Seasons of the Self</h3>
+                    <p>"I am winter's quiet strength and spring's wild hope. Summer's fire burns in my chest, autumn's wisdom in my bones..."</p>
+                    <div class="card-meta">
+                        <span>✍️ Lyric Poetry</span>
+                        <span>❤️ 312 likes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter fade-in" id="contact">
+        <h2>Join the Flavor & Flow Community</h2>
+        <p>Get weekly recipes, workout plans, playlist updates, and exclusive poetry delivered to your inbox.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social">
+            <a href="https://wa.me/your-number" target="_blank">💬</a>
+            <a href="https://instagram.com/your-handle" target="_blank">📸</a>
+            <a href="https://tiktok.com/@your-handle" target="_blank">🎵</a>
+            <a href="https://facebook.com/your-page" target="_blank">👍</a>
+            <a href="https://youtube.com/@your-channel" target="_blank">▶️</a>
+        </div>
+        <p>Made with ❤️ by Flavor & Flow | Connecting food, fitness, music & poetry</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">© 2026 All rights reserved</p>
+    </footer>
+
+    <script>
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+        });
+    </script>
+
+</body>
+</html>
